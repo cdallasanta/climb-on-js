@@ -1,6 +1,6 @@
 class PeriodicInspectionsController < ApplicationController
   before_action :check_for_element_and_periodic_existance
-  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:new, :create, :update]
+  # before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
 
   # /elements/:element_id/periodic_inspections/new
   def new
@@ -12,13 +12,14 @@ class PeriodicInspectionsController < ApplicationController
     @inspection = PeriodicInspection.new(element: @element)
 
     # if the inspection will change when saved, add the current user to be referenced by
-    # 'edited by', and also reduced the number of calls to the db
+    # 'edited by', and also reduce the number of calls to the db
     @inspection.assign_attributes(periodic_params)
+    @inspection.comments.last.user = current_user
     if @inspection.changed_for_autosave?
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
         flash[:alert] = "Inspection logged successfully"
-        redirect_to element_periodic_inspection_path(@element, @inspection)
+        render json: @inspection
       else
         render :edit
       end
@@ -28,6 +29,7 @@ class PeriodicInspectionsController < ApplicationController
   # /elements/:element_id/periodic_inspections/:id
   def show
     # @inspection is set in the before_action, check_for_element_and_inspection
+    render json: @inspection
   end
 
   # /elements/:element_id/periodic_inspections/:id/edit
@@ -43,25 +45,24 @@ class PeriodicInspectionsController < ApplicationController
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
         flash[:alert] = "Inspection logged successfully"
-        redirect_to element_periodic_inspection_path(@element, @inspection)
+        render json: @inspection
       else
         render :edit
       end
     else
-      redirect_to element_periodic_inspection_path(@element, @inspection)
+      render json: @inspection
     end
   end
 
   private
 
   def periodic_params
-    params.require(:periodic_inspection).permit(
+    params.permit(
       :date,
       :equipment_complete,
       :element_complete,
       :environment_complete,
       comments_attributes: [
-        :user_id,
         :content
       ]
     )

@@ -36,6 +36,9 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
+# Active Model Serializer for AJAX and JSON calls
+gem 'active_model_serializers'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

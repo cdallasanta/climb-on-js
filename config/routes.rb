@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     resources :periodic_inspections, only: [:new, :create, :show, :edit, :update]
   end
 
-  resources :comments, only: [:index]
+  resources :periodic_inspections
+  resources :comments, only: [:index, :show]
 end
