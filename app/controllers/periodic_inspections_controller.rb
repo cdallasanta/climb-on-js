@@ -13,9 +13,13 @@ class PeriodicInspectionsController < ApplicationController
 
     # if the inspection will change when saved, add the current user to be referenced by
     # 'edited by', and also reduce the number of calls to the db
-    binding.pry
     @inspection.assign_attributes(periodic_params)
+
     if @inspection.changed_for_autosave?
+      if @inspection.comments.last
+        @inspection.comments.last.user = current_user unless @inspection.comments.last.user
+      end
+
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
         flash[:alert] = "Inspection logged successfully"

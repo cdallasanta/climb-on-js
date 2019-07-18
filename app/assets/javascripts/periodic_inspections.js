@@ -20,30 +20,31 @@ var saveInspection = function() {
       "content": $('textarea').val()
     }]
   }
-
-  if (this.id === "new_periodic_inspection") {
+  debugger;
+  if (this.data("inspection-id") === undefined) {
     // POST to db
     $.post(`/elements/${elementId}/periodic_inspections/`, data, function(resp){
       // TODO set alert that it saved successfully
 
       // set form id
-      $('form').data('inspection_id', resp.id)
+      $('form').data('inspection-id', resp.id)
 
       // update comments
       resp.comments.forEach(function(comment){
+        // TODO can be a prototype method
         $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
       })
       $('textarea').val("");
 
       // change "save" button to "update"
-      $(':submit').text("Update Periodic Inspection");
+      $(':submit').val("Update Periodic Inspection");
     })
-  } else if (this.id.includes("edit_periodic_inspection")) {
+  } else {
     // PATCH to db
 
     $.ajax({
       type: 'PATCH',
-      url: `/periodic_inspections/${this.dataset.id}`,
+      url: `/periodic_inspections/${this.dataset.inspection-id}`,
       data: JSON.stringify(data),
       processData: false,
       contentType: 'application/merge-patch+json',
@@ -57,6 +58,6 @@ var saveInspection = function() {
 $(function(){
   $(':submit').click(function(event){
     event.preventDefault();
-    saveInspection.call($('form')[0]);
+    saveInspection.call($('form'));
   });
 });
