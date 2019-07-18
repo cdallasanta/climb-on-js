@@ -36,20 +36,27 @@ var saveInspection = function() {
       })
       $('textarea').val("");
 
+      
+      // TODO: update edited by
+
       // change "save" button to "update"
       $(':submit').val("Update Periodic Inspection");
     })
   } else {
     // PATCH to db, TODO: move this to a service object
-debugger;
     $.ajax({
       type: 'PATCH',
-      url: `/periodic_inspections/${this.dataset.inspection-id}`,
-      data: JSON.stringify(data),
-      processData: false,
-      contentType: 'application/merge-patch+json',
+      url: `/elements/${elementId}/periodic_inspections/${$('form').data('inspection-id')}`,
+      data: data,
       success: function(resp){
-        debugger;
+        // update comments
+        resp.comments.forEach(function(comment){
+          // TODO can be a prototype method
+          $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
+        })
+        $('textarea').val("");
+
+      // TODO: update edited by
       }
     });
   }
