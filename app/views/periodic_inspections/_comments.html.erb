@@ -1,6 +1,8 @@
 <%= f.label "Comments:" %><br>
-
-<%= f.fields_for :comments do |ff| %>
-  <%= ff.hidden_field :user_id %>
-  <%= textarea_or_straight_text(ff) %>
-<% end %>
+<div id="comments-previous"></div>
+<div id="comments-new">
+  <%= f.fields_for :comments do |ff| %>
+    <%= ff.hidden_field :user_id %>
+    <%= textarea_or_straight_text(ff) %>
+  <% end %>
+</div>

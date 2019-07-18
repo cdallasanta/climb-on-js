@@ -1,3 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :content, :user
+  belongs_to :user
+  belongs_to :commentable, polymorphic: true
 end
