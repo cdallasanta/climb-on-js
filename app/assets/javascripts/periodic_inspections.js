@@ -20,9 +20,9 @@ var saveInspection = function() {
       "content": $('textarea').val()
     }]
   }
-  debugger;
+
   if (this.data("inspection-id") === undefined) {
-    // POST to db
+    // POST to db, TODO: move this to a service object
     $.post(`/elements/${elementId}/periodic_inspections/`, data, function(resp){
       // TODO set alert that it saved successfully
 
@@ -40,8 +40,8 @@ var saveInspection = function() {
       $(':submit').val("Update Periodic Inspection");
     })
   } else {
-    // PATCH to db
-
+    // PATCH to db, TODO: move this to a service object
+debugger;
     $.ajax({
       type: 'PATCH',
       url: `/periodic_inspections/${this.dataset.inspection-id}`,
