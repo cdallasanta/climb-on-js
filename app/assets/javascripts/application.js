@@ -15,4 +15,4 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-//= require periodic_inspections
+//= require climb_on_service
