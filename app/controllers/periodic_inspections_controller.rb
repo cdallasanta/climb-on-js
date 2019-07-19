@@ -23,10 +23,9 @@ class PeriodicInspectionsController < ApplicationController
 
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
-        flash[:alert] = "Inspection logged successfully"
         render json: @inspection, status: 201
       else
-        render json: { error: @inspection.errors.full_messages }, status: 422
+        render partial: 'application/errors', locals: {object: @inspection, alert_type: "alert-danger"}, status: 422
       end
     end
   end
@@ -56,7 +55,8 @@ class PeriodicInspectionsController < ApplicationController
         flash[:alert] = "Inspection logged successfully"
         render json: @inspection, status: 201
       else
-        render json: { error: @inspection.errors.full_messages }, status: 422
+        render partial: 'application/errors', locals: {object: @inspection}, class: "alert alert-error fields_with_errors"
+        # render json: { error: @inspection.errors.full_messages }, status: 422
       end
     else
       # TODO, if there's not change?
