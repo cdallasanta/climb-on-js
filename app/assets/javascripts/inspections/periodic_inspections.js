@@ -1,6 +1,5 @@
-//get the element ID from the form's action attribute
-const elementId = $('form')[0].action.split('elements/').pop().split("/periodic").shift()
-const periodicService = new ClimbOnService(elementId, "periodic") 
+let elementId;
+let periodicService;
 
 let saveInspection = function() {
   let data = {
@@ -45,8 +44,11 @@ let saveInspection = function() {
 }
 
 $(function(){
+  //get the element ID from the form's action attribute
+  elementId = $('form')[0].action.split('elements/').pop().split("/periodic").shift()
+  periodicService = new ClimbOnService(elementId, "periodic")
+   
   $(':submit').click(function(event){
-    debugger;
     event.preventDefault();
     saveInspection();
   });

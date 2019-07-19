@@ -2,7 +2,7 @@ class ClimbOnService{
   constructor(elementId, inspectionType) {
     this.elementId = elementId;
     this.inspectionType = inspectionType + "_inspection";
-    this.baseURL = `/elements/${elementId}/${inspectionType}s`
+    this.baseURL = `/elements/${this.elementId}/${inspectionType}s`
   }
 
   get(id){
