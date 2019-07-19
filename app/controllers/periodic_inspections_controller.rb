@@ -45,7 +45,6 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def update
-    binding.pry
     @inspection.assign_attributes(periodic_params)
 
     if @inspection.changed_for_autosave?

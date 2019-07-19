@@ -5,23 +5,26 @@
     <%= f.date_field :date, class: "form-control-sm", required: true %>
   </div>
   <div class="form-group">
+    <h3>Equipment:</h3>
     <%= raw @element.periodic_equipment_instructions %><br>
     <div class="form-check">
-      <%= f.check_box :equipment_complete, class:"form-check-input" %>
+      <%= f.check_box :equipment_complete, class: "form-check-input" %>
       <%= f.label "Section completed?", class: "form-check-label" %>
     </div>
   </div>
   <div class="form-group">
+    <h3>Element:</h3>
     <%= raw @element.periodic_element_instructions %><br>
     <div class="form-check">
-      <%= f.check_box :element_complete, class:"form-check-input" %>
+      <%= f.check_box :element_complete, class: "form-check-input" %>
       <%= f.label "Section completed?", class: "form-check-label" %>
     </div>
   </div>
   <div class="form-group">
+    <h3>Environment:</h3>
     <%= raw @element.periodic_environment_instructions %><br>
     <div class="form-check">
-      <%= f.check_box :environment_complete, class:"form-check-input" %>
+      <%= f.check_box :environment_complete, class: "form-check-input" %>
       <%= f.label "Section completed?", class: "form-check-label" %>
     </div>
   </div>

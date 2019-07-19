@@ -30,12 +30,12 @@ var saveInspection = function() {
       $('form').data('inspection-id', resp.id)
 
       // update comments
+      $('#comments-previous').empty();
       resp.comments.forEach(function(comment){
         // TODO can be a prototype method
         $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
       })
       $('textarea').val("");
-
       
       // TODO: update edited by
 
@@ -50,6 +50,7 @@ var saveInspection = function() {
       data: data,
       success: function(resp){
         // update comments
+        $('#comments-previous').empty();
         resp.comments.forEach(function(comment){
           // TODO can be a prototype method
           $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
