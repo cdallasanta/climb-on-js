@@ -13,6 +13,11 @@ module ApplicationHelper
     current_user.site
   end
 
+  def javascript_exists?
+    script = "#{Rails.root}/app/assets/javascripts/#{params[:controller]}.js"
+    File.exists?(script) || File.exists?("#{script}.coffee") 
+  end
+
   # adds form errors to the top of the form
   def errors_check(object)
     if object.errors.any?

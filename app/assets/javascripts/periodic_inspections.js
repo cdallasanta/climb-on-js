@@ -1,7 +1,7 @@
-let elementId;
-let periodicService;
+var elementId;
+var periodicService;
 
-let saveInspection = function() {
+var saveInspection = function() {
   let data = {
     "date": $("#periodic_inspection_date").val(),
     "equipment_complete": $("#periodic_inspection_equipment_complete").is(":checked"),

@@ -19,6 +19,8 @@
     <% end %>
 
     <%= yield %>
-
+    <% if javascript_exists? %>
+      <%= javascript_include_tag params[:controller] %>
+    <% end %>
   </body>
 </html>
