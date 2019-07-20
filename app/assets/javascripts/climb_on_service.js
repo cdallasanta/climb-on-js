@@ -16,7 +16,7 @@ class ClimbOnService{
       // set form id
       $('form').data('inspection-id', resp.id)
 
-      this.updateComments(resp.comments);
+      ClimbOnService.updateComments(resp.comments);
       
       // TODO: update edited by
 
@@ -24,10 +24,10 @@ class ClimbOnService{
       $(':submit').val("Update Periodic Inspection");
       
       // alert bar = "success!"
-      this.alertPartial(resp["alert"])
+      ClimbOnService.alertPartial(resp["alert"])
     })
     .fail((resp) => {
-      this.alertPartial(resp["responseText"])
+      ClimbOnService.alertPartial(resp["responseText"])
     })
   }
 
@@ -37,30 +37,28 @@ class ClimbOnService{
       url: this.baseURL + `/${inspId}`,
       data: data,
       success: function(resp){
-        debugger;
-        this.updateComments(resp.comments);
+        ClimbOnService.updateComments(resp.comments);
 
-      // TODO: update edited by
-      
-      // alert bar = "success!"
-      this.alertPartial(resp["alert"])
-      }.call(this),
+        // TODO: update edited by
+        
+        // alert bar = "success!"
+        ClimbOnService.alertPartial(resp["alert"])
+      },
       failure: function(resp){
-        this.alertPartial(resp["responseText"])
+        ClimbOnService.alertPartial(resp["responseText"])
       }
     })
   }
 
-  updateComments(comments){
+  static updateComments(comments){
     $('#comments-previous').empty();
     comments.forEach(function(comment){
-      // TODO can be a prototype method
       $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
     })
     $('textarea').val("");
   }
 
-  alertPartial(html){
+  static alertPartial(html){
     $('#alert-ul').remove();
     $('form').prepend(html)
   }

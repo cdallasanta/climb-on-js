@@ -52,7 +52,7 @@ class PeriodicInspectionsController < ApplicationController
 
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
-        render json: @inspection, message: "Inspection logged successfully", status: 201
+        render json: @inspection, message: "Inspection updated successfully", status: 201
       else
         render partial: 'application/errors', locals: {object: @inspection, alert_type: "alert-danger", message: "Error:"}, status: 422
       end
