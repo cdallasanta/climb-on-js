@@ -1,5 +1,6 @@
 <ul class="alert fields_with_errors <%= alert_type %>" id="alert-ul">
-  <% object.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
+  <strong><%= message %></strong>
+  <% object.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
   <% end %>
 </ul>

@@ -14,7 +14,6 @@ class ClimbOnService{
     $.post(this.baseURL, data)
     .done((resp) => {
       // set form id
-      debugger;
       $('form').data('inspection-id', resp.id)
 
       this.updateComments(resp.comments);
@@ -23,6 +22,9 @@ class ClimbOnService{
 
       // change "save" button to "update"
       $(':submit').val("Update Periodic Inspection");
+      
+      // alert bar = "success!"
+      this.alertPartial(resp["alert"])
     })
     .fail((resp) => {
       this.alertPartial(resp["responseText"])
@@ -35,10 +37,14 @@ class ClimbOnService{
       url: this.baseURL + `/${inspId}`,
       data: data,
       success: function(resp){
+        debugger;
         this.updateComments(resp.comments);
 
       // TODO: update edited by
-      },
+      
+      // alert bar = "success!"
+      this.alertPartial(resp["alert"])
+      }.call(this),
       failure: function(resp){
         this.alertPartial(resp["responseText"])
       }

@@ -23,9 +23,9 @@ class PeriodicInspectionsController < ApplicationController
 
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
-        render json: @inspection, status: 201
+        render json: @inspection, message: "Inspection logged successfully", status: 201
       else
-        render partial: 'application/errors', locals: {object: @inspection, alert_type: "alert-danger"}, status: 422
+        render partial: 'application/errors', locals: {object: @inspection, alert_type: "alert-danger", message: "Error:"}, status: 422
       end
     end
   end
@@ -33,7 +33,7 @@ class PeriodicInspectionsController < ApplicationController
   # /elements/:element_id/periodic_inspections/:id
   def show
     # @inspection is set in the before_action, check_for_element_and_inspection
-    render json: @inspection
+    render json: @inspection, message: "Inspection logged successfully"
   end
 
   # /elements/:element_id/periodic_inspections/:id/edit
@@ -52,11 +52,9 @@ class PeriodicInspectionsController < ApplicationController
 
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
-        flash[:alert] = "Inspection logged successfully"
-        render json: @inspection, status: 201
+        render json: @inspection, message: "Inspection logged successfully", status: 201
       else
-        render partial: 'application/errors', locals: {object: @inspection}, class: "alert alert-error fields_with_errors"
-        # render json: { error: @inspection.errors.full_messages }, status: 422
+        render partial: 'application/errors', locals: {object: @inspection, alert_type: "alert-danger", message: "Error:"}, status: 422
       end
     else
       # TODO, if there's not change?
