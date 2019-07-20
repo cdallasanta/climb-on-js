@@ -16,13 +16,11 @@ var saveInspection = function() {
     }]
   }
 
+  //if this is undefined, it's a new inspection. Otherwise, we're updating an old one
   let inspectionId = $('form').data("inspection-id")
-
   if (inspectionId === undefined) {
-    // POST to db, TODO: move this to a service object
     periodicService.post(data)
   } else {
-    // PATCH to db, TODO: move this to a service object
     periodicService.patch(data, inspectionId)
   }
 }
@@ -35,5 +33,11 @@ $(function(){
   $(':submit').click(function(event){
     event.preventDefault();
     saveInspection();
+  });
+  $("textarea").keypress(function (e) {
+    if(e.which == 13) {
+      event.preventDefault();
+      saveInspection();
+    }
   });
 });
