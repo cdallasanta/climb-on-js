@@ -4,7 +4,7 @@ var showInspections = function(){
   $.get(`/elements/${elementId}/periodic_inspections`, function(resp){
     // empty the ul, then populate with an li and a link to each inspection
     $('#periodic-ul').empty();
-    resp.forEach(function(insp){
+    resp.reverse().forEach(function(insp){
       $('#periodic-ul').append(`<li><a href="/elements/${insp.element.id}/periodic_inspections/${insp.id}/edit">${insp.date}</a></li>`);
     })
   })

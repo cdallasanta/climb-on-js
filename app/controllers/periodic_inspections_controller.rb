@@ -43,7 +43,7 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def index
-    render json: PeriodicInspection.all
+    render json: PeriodicInspection.where(element_id: params[:element_id])
   end
 
   # /elements/:element_id/periodic_inspections/:id/edit

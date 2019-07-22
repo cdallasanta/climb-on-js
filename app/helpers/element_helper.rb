@@ -27,9 +27,12 @@ module ElementHelper
   end
 
   # puts date of the last periodic inspection, and a link to view it
+  # TODO it's not pretty, but the shoe fits
   def date_of_last_periodic
     if @element.periodic_inspections != []
-      link_to @element.periodic_inspections.last.date, edit_element_periodic_inspection_path(@element, @element.periodic_inspections.last)
+      link = link_to @element.periodic_inspections.last.date, edit_element_periodic_inspection_path(@element, @element.periodic_inspections.last)
+      show_more = "<a href='#' id='show-all-periodics' data-element-id=#{@element.id}>Show all periodic inspections</a>"
+      ("<li>#{link}</li>" + show_more).html_safe
     else
       "This element has never recieved a periodic inspection"
     end
