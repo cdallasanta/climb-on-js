@@ -16,9 +16,9 @@ var saveInspection = function() {
     }]
   }
 
-  //if this is undefined, it's a new inspection. Otherwise, we're updating an old one
+  //if this is undefined or an empty string, it's a new inspection. Otherwise, we're updating an old one
   let inspectionId = $('form').data("inspection-id")
-  if (inspectionId === undefined) {
+  if (inspectionId === "" || inspectionId === undefined) {
     periodicService.post(data)
   } else {
     periodicService.patch(data, inspectionId)
@@ -102,6 +102,6 @@ $(function(){
     }
   });
   $("#periodic_inspection_date").change(function(e){
-    loadInspection(new Date(e.target.value));
+    loadInspection(e.target.value);
   })
 });
