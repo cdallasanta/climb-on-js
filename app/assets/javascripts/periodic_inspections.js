@@ -1,7 +1,7 @@
-var elementId;
-var periodicService;
+let elementId;
+let periodicService;
 
-var saveInspection = function() {
+let saveInspection = () => {
   let data = {
     "date": $("#periodic_inspection_date").val(),
     "equipment_complete": $("#periodic_inspection_equipment_complete").is(":checked"),
@@ -25,26 +25,26 @@ var saveInspection = function() {
   }
 }
 
-var loadInspection = function(date) {
+let loadInspection = (date) => {
   periodicService.get(date);
 }
 
-$(function(){
+$(() => {
   //get the element ID from the form's action attribute
   elementId = $('form')[0].action.split('elements/').pop().split("/periodic").shift()
   periodicService = new ClimbOnService(elementId, "periodic")
    
-  $(':submit').click(function(e){
+  $(':submit').click((e) => {
     e.preventDefault();
     saveInspection();
   });
-  $("textarea").keypress(function(e) {
+  $("textarea").keypress((e) =>  {
     if(e.which == 13) {
       event.preventDefault();
       saveInspection();
     }
   });
-  $("#periodic_inspection_date").change(function(e){
+  $("#periodic_inspection_date").change((e) => {
     loadInspection(e.target.value);
   })
 });

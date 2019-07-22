@@ -8,7 +8,7 @@ class ClimbOnService{
   get(date){
     $.get(this.baseURL + `/${date}`)
       .done((resp) => {
-        var periodicInspection = new PeriodicInspection(resp);
+        const periodicInspection = new PeriodicInspection(resp);
         periodicInspection.updatePage();
       })
       .fail(() => {
@@ -24,11 +24,11 @@ class ClimbOnService{
   post(data){
     $.post(this.baseURL, data)
     .done((resp) => {
-      var periodicInspection = new PeriodicInspection(resp);
+      const periodicInspection = new PeriodicInspection(resp);
       periodicInspection.updatePage();
     })
     .fail((resp) => {
-      var periodicInspection = new PeriodicInspection(resp);
+      const periodicInspection = new PeriodicInspection(resp);
       periodicInspection.alertPartial();
     })
   }
@@ -38,12 +38,12 @@ class ClimbOnService{
       type: 'PATCH',
       url: this.baseURL + `/${inspId}`,
       data: data,
-      success: function(resp){
-        var periodicInspection = new PeriodicInspection(resp);
+      success: (resp) => {
+        const periodicInspection = new PeriodicInspection(resp);
         periodicInspection.updatePage();
       },
-      failure: function(resp){
-        var periodicInspection = new PeriodicInspection(resp);
+      failure: (resp) => {
+        const periodicInspection = new PeriodicInspection(resp);
         periodicInspection.alertPartial();
       }
     })
@@ -79,7 +79,7 @@ class PeriodicInspection{
   
   updateComments(){
     $('#previous-comments').empty();
-    this.comments.forEach(function(comment){
+    this.comments.forEach((comment) => {
       $('#previous-comments').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
     })
     $('textarea').val("");
@@ -92,7 +92,7 @@ class PeriodicInspection{
 
   updateEditedBy(){
     $('#updated-by').remove();
-    let users = this.users.reduce((html, user)=>{
+    const users = this.users.reduce((html, user)=>{
       if (!html.includes(user.fullname))
       return html += user.fullname + '<br>'
     }, "");
