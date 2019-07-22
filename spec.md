@@ -2,7 +2,7 @@
 
 ##Project Specs:
 [x] Must have a Rails Backend and new requirements implemented through JavaScript.
-[] Makes use of ES6 features as much as possible(e.g Arrow functions, Let & Const, Constructor Functions)
+[x] Makes use of ES6 features as much as possible(e.g Arrow functions, Let & Const, Constructor Functions)
 [x] Must translate the JSON responses into Javascript Model Objects using either ES6 class or constructor syntax. 
   - class PeriodicInspection
 [x] Must render at least one index page (index resource - 'list of things') via JavaScript and an Active Model Serialization JSON Backend.
