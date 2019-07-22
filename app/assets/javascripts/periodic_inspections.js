@@ -25,15 +25,20 @@ var saveInspection = function() {
   }
 }
 
+var loadInspection = function(date) {
+  periodicService.get(date);
+}
+
 class PeriodicInspection{
   constructor(data){
-    this.id = data["id"],
-    this.date = data["date"],
-    this.equipment_complete = data["equipment_complete"],
-    this.element_complete = data["element_complete"],
-    this.environment_complete = data["environment_complete"],
-    this.alert = data["alert"] || data["responseText"]
-    this.comments = data["comments"]
+    this.id = data["id"];
+    this.date = data["date"];
+    this.equipment_complete = data["equipment_complete?"];
+    this.element_complete = data["element_complete?"];
+    this.environment_complete = data["environment_complete?"];
+    this.alert = data["alert"] || data["responseText"];
+    this.comments = data["comments"];
+    this.users = data["users"];
   }
 
   updatePage() {
@@ -41,13 +46,13 @@ class PeriodicInspection{
     $('form').data('inspection-id', this.id)
 
     this.updateComments();
-    
-    // TODO: update edited by
+    this.updateEditedBy();
+    this.updateCheckboxes();
 
     // change "save" button to "update"
     $(':submit').val("Update Periodic Inspection");
     
-    // alert bar = "success!"
+    // alert bar = "success!" or lists errors
     this.alertPartial()
   }
   
@@ -63,6 +68,22 @@ class PeriodicInspection{
     $('#alert-ul').remove();
     $('form').prepend(this.alert);
   }
+
+  updateEditedBy(){
+    $('#updated-by').remove();
+    let users = this.users.reduce((html, user)=>{
+      if (!html.includes(user.fullname))
+      return html += user.fullname + '<br>'
+    }, "");
+
+    $(':submit').before(`<div id="updated-by"><h5>Updated by:</h5>${users}</div>`);
+  }
+
+  updateCheckboxes(){
+    $('#periodic_inspection_equipment_complete').prop('checked', this.equipment_complete);
+    $('#periodic_inspection_element_complete').prop('checked', this.element_complete);
+    $('#periodic_inspection_environment_complete').prop('checked', this.environment_complete);
+  }
 }
 
 $(function(){
@@ -70,14 +91,17 @@ $(function(){
   elementId = $('form')[0].action.split('elements/').pop().split("/periodic").shift()
   periodicService = new ClimbOnService(elementId, "periodic")
    
-  $(':submit').click(function(event){
-    event.preventDefault();
+  $(':submit').click(function(e){
+    e.preventDefault();
     saveInspection();
   });
-  $("textarea").keypress(function (e) {
+  $("textarea").keypress(function(e) {
     if(e.which == 13) {
       event.preventDefault();
       saveInspection();
     }
   });
+  $("#periodic_inspection_date").change(function(e){
+    loadInspection(new Date(e.target.value));
+  })
 });

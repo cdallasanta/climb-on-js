@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   resources :elements, only: [:index, :show, :edit, :update] do
     resources :ropes, only: [:new, :create, :update]
     resources :preuse_inspections, only: [:index, :create, :edit, :update]
-    resources :periodic_inspections, only: [:new, :create, :show, :edit, :update]
+    resources :periodic_inspections, only: [:new, :create, :edit, :update]
   end
+
+  get '/elements/:element_id/periodic_inspections/:date', to: 'periodic_inspections#show'
 
   resources :periodic_inspections
   resources :comments, only: [:index, :show]

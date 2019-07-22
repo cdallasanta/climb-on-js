@@ -1,6 +1,5 @@
 class PeriodicInspectionsController < ApplicationController
   before_action :check_for_element_and_periodic_existance
-  # before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
 
   # /elements/:element_id/periodic_inspections/new
   def new
@@ -30,10 +29,14 @@ class PeriodicInspectionsController < ApplicationController
     end
   end
 
-  # /elements/:element_id/periodic_inspections/:id
+  # /elements/:element_id/periodic_inspections/:date
   def show
-    # @inspection is set in the before_action, check_for_element_and_inspection
-    render json: @inspection, message: "Inspection logged successfully"
+    @inspection = PeriodicInspection.find_by(date: params[:date])
+    if @inspection
+      render json: @inspection, message: "There is an inspection already logged for that date. Loaded below."
+    else
+      render json: @inspection, status: 404
+    end
   end
 
   # /elements/:element_id/periodic_inspections/:id/edit
@@ -58,7 +61,7 @@ class PeriodicInspectionsController < ApplicationController
       end
     else
       # TODO, if there's not change?
-      render json: @inspection
+      render json: @inspection, message: "Inspection updated successfully", status: 201
     end
   end
 
@@ -90,24 +93,6 @@ class PeriodicInspectionsController < ApplicationController
     else
       flash[:alert] = "No element found with that id"
       redirect_to root_path
-    end
-  end
-
-  def check_for_previous_periodic_on_that_date
-    previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
-    if previous_inspection != @inspection
-      flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"
-      if @inspection
-        render :edit and return
-      else
-        redirect_to new_element_periodic_inspection_path(@element) and return
-      end
-    end
-  end
-
-  def remove_empty_comments
-    params[:periodic_inspection][:comments_attributes].delete_if do |num, comment|
-      comment[:content] == ""
     end
   end
 end

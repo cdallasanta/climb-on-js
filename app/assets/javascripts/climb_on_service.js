@@ -5,9 +5,18 @@ class ClimbOnService{
     this.baseURL = `/elements/${this.elementId}/${this.inspectionType}s`
   }
 
-  get(inspId){
-    $.get(this.baseURL + `/${inspId}`)
-
+  get(date){
+    $.get(this.baseURL + `/${date}`)
+      .done((resp) => {
+        var periodicInspection = new PeriodicInspection(resp);
+        periodicInspection.updatePage();
+      })
+      .fail(() => {
+        $('#alert-ul').remove();
+        $(':checkbox').prop('checked', false);
+        $('#comments-previous').empty();
+        $('#updated-by').remove();
+      })
   }
 
   post(data){
@@ -17,7 +26,6 @@ class ClimbOnService{
       periodicInspection.updatePage();
     })
     .fail((resp) => {
-      debugger;
       var periodicInspection = new PeriodicInspection(resp);
       periodicInspection.alertPartial();
     })

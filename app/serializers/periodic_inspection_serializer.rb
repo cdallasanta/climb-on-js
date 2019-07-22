@@ -5,6 +5,8 @@ class PeriodicInspectionSerializer < ActiveModel::Serializer
   has_many :users
 
   def alert
-    ApplicationController.new.render_to_string(partial: 'application/errors', locals: {object: object, alert_type: "alert-success", message: @instance_options[:message]})
+    if @instance_options[:message]
+      ApplicationController.new.render_to_string(partial: 'application/errors', locals: {object: object, alert_type: "alert-success", message: @instance_options[:message]})
+    end
   end
 end
