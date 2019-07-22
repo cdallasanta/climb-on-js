@@ -14,7 +14,7 @@ class ClimbOnService{
       .fail(() => {
         $('#alert-ul').remove();
         $(':checkbox').prop('checked', false);
-        $('#comments-previous').empty();
+        $('#comments-div').empty();
         $('#updated-by').remove();
         $('form').data("inspection-id", "")
       })

@@ -42,6 +42,10 @@ class PeriodicInspectionsController < ApplicationController
     end
   end
 
+  def index
+    render json: PeriodicInspection.all
+  end
+
   # /elements/:element_id/periodic_inspections/:id/edit
   def edit
     # @inspection is set in the before_action, check_for_element_and_inspection
