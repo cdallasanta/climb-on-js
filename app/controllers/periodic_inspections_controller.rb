@@ -34,7 +34,7 @@ class PeriodicInspectionsController < ApplicationController
 
   # /elements/:element_id/periodic_inspections/:date
   def show
-    @inspection = PeriodicInspection.find_by(date: params[:date])
+    @inspection = @element.periodic_inspections.find_by(date: params[:date])
     if @inspection
       render json: @inspection, message: "There is an inspection already logged for that date. Loaded below."
     else

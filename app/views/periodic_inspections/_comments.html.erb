@@ -1,6 +1,9 @@
 <h3><%= f.label "Comments:" %><br></h3>
 <div id="comments-div">
-  <%= f.fields_for :comments do |ff| %>
-    <%= textarea_or_straight_text(ff) %>
-  <% end %>
+  <div id="previous-comments">
+    <%= f.fields_for :comments do |ff| %>
+      <%= print_comments(ff) %>
+    <% end %>
+  </div>
+  <textarea></textarea>
 </div>
