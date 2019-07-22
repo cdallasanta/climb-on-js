@@ -57,11 +57,11 @@ class PeriodicInspection{
   }
   
   updateComments(){
-    $('#comments-previous').empty();
+    $('#comments-div').empty();
     this.comments.forEach(function(comment){
-      $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
+      $('#comments-div').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
     })
-    $('textarea').val("");
+    $('#comments-div').append(document.createElement('textarea'))
   }
 
   alertPartial(){

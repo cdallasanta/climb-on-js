@@ -1,4 +1,4 @@
-<%= form_for [inspection.element, inspection], :html => {:class => 'periodic-form'} do |f| %>
+<%= form_for [inspection.element, inspection], :html => {:class => 'periodic-form', data: { "inspection-id": inspection.id }} do |f| %>
   <%= errors_check(inspection) %>
   <div class="form-group">
     <%= f.label :date %>

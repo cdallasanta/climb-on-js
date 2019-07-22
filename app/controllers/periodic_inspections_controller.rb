@@ -3,9 +3,9 @@ class PeriodicInspectionsController < ApplicationController
 
   # /elements/:element_id/periodic_inspections/new
   def new
-    @inspection = PeriodicInspection.find_or_create_by(element: @element, date:Date.today)
-    if PeriodicInspection.find_by(element: @element, date:Date.today)
-      redirect_to edit_periodic_inspection_path()
+    @inspection = PeriodicInspection.find_or_initialize_by(element: @element, date:Date.today)
+    if !@inspection.new_record?
+      redirect_to edit_element_periodic_inspection_path(@element, @inspection)
     end
     @inspection.comments.build(user:current_user)
   end
