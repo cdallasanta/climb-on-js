@@ -25,6 +25,46 @@ var saveInspection = function() {
   }
 }
 
+class PeriodicInspection{
+  constructor(data){
+    this.id = data["id"],
+    this.date = data["date"],
+    this.equipment_complete = data["equipment_complete"],
+    this.element_complete = data["element_complete"],
+    this.environment_complete = data["environment_complete"],
+    this.alert = data["alert"] || data["responseText"]
+    this.comments = data["comments"]
+  }
+
+  updatePage() {
+    // set form id
+    $('form').data('inspection-id', this.id)
+
+    this.updateComments();
+    
+    // TODO: update edited by
+
+    // change "save" button to "update"
+    $(':submit').val("Update Periodic Inspection");
+    
+    // alert bar = "success!"
+    this.alertPartial()
+  }
+  
+  updateComments(){
+    $('#comments-previous').empty();
+    this.comments.forEach(function(comment){
+      $('#comments-previous').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
+    })
+    $('textarea').val("");
+  }
+
+  alertPartial(){
+    $('#alert-ul').remove();
+    $('form').prepend(this.alert);
+  }
+}
+
 $(function(){
   //get the element ID from the form's action attribute
   elementId = $('form')[0].action.split('elements/').pop().split("/periodic").shift()

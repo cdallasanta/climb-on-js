@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # site is only optional in the case of a facebook signup, where
-  # it redirect you and force you to choose a site
+  # it redirects you and forces you to choose a site
   belongs_to :site, optional: true
   has_many :user_periodic_inspections, class_name: "JoinTable::UserPeriodicInspections"
   has_many :periodic_inspections, through: :user_periodic_inspections
