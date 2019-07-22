@@ -146,8 +146,9 @@ class PreuseInspectionsController < ApplicationController
 
   # called if they try to save an inspection for a date that already has
   # an inspection logged
+  # TODO, is PreuseInspection.find_past_inspection defined anywhere?
   def link_to_previous_preuse_on_that_date
-    previous_inspection = PreuseInspection.find_past_inspection(params[:preuse_inspection][:date], @element.id)
+    previous_inspection = @element.find_past_inspection(params[:preuse_inspection][:date])
     if previous_inspection
       flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>here</a>"
       redirect_to edit_element_preuse_inspection_path(@element, @inspection)
