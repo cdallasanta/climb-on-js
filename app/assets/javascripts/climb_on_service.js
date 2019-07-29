@@ -12,6 +12,7 @@ class ClimbOnService{
         periodicInspection.updatePage();
       })
       .fail(() => {
+        // this isn't a "fail" per se, it just means that no inspection has been logged for that date. It shows up in the console as an error though
         $('#alert-ul').remove();
         $(':checkbox').prop('checked', false);
         $('#previous-comments').empty();
@@ -63,7 +64,7 @@ class PeriodicInspection{
   }
 
   updatePage() {
-    // set form id
+    // set form id to the inspection id
     $('form').data('inspection-id', this.id)
 
     this.updateComments();

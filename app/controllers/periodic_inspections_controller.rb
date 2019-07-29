@@ -13,7 +13,8 @@ class PeriodicInspectionsController < ApplicationController
   def create
     @inspection = PeriodicInspection.new(element: @element)
 
-    # TODO, something about the statement below doesn't pass the code smell
+    # TODO, something about the statement/code below doesn't pass the code smell
+
     # if the inspection will change when saved, add the current user to be referenced by
     # 'edited by', and also reduce the number of calls to the db
     @inspection.assign_attributes(periodic_params)

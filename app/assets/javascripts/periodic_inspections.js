@@ -16,7 +16,7 @@ let saveInspection = () => {
     }]
   }
 
-  //if this is undefined or an empty string, it's a new inspection. Otherwise, we're updating an old one
+  //if inspectionId is undefined or an empty string, it's a new inspection. Otherwise, we're updating an old one
   let inspectionId = $('form').data("inspection-id")
   if (inspectionId === "" || inspectionId === undefined) {
     periodicService.post(data)
