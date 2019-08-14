@@ -24,7 +24,7 @@ FACEBOOK_SECRET = (your app secret here)
 You can then run `rails server` in your terminal, and the app will be available at localhost:3000.
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/ropes-sinatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/climb-on-js. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ## License
 The gem is available as open source under the terms of the GNU General Public License.
