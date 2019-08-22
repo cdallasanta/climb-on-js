@@ -1,7 +1,7 @@
 var showInspections = function(){
-  // get call to server to retreive all periodic inspections from this element
   let elementId = $('#show-all-periodics').data("elementId");
 
+  // get call to server to retreive all periodic inspections from this element
   $.get(`/elements/${elementId}/periodic_inspections`, function(resp){
     // empty the ul, then populate with an li and a link to each inspection
     $('#periodic-ul').empty();

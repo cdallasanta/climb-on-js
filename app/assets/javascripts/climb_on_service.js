@@ -80,6 +80,20 @@ class PeriodicInspection{
   
   updateComments(){
     $('#previous-comments').empty();
+    this.comments.sort(function(a, b){
+      var commentA = a.content.toUpperCase(); // ignore upper and lowercase
+      var commentB = b.content.toUpperCase(); // ignore upper and lowercase
+      if (commentA < commentB) {
+        return -1;
+      }
+      if (commentA > commentB) {
+        return 1;
+      }
+    
+      // content must be equal
+      return 0;
+    })
+
     this.comments.forEach((comment) => {
       $('#previous-comments').append(`<strong>${comment.user.fullname}: </strong>${comment.content}<br>`)
     })
