@@ -2,6 +2,11 @@
 
 Climb On is a web app for challenge course managers (CCM) to cut down on the tremendous amounts of paperwork they need to create and keep. The site's facilitators can complete their pre-use inspections online, seeing comments from past users, and log the number of uses each rope or cable receives. With higher levels of permissions, users can log periodic inspections, retire and replace ropes, and manage the instructions presented to the facilitators.
 
+### Current Features
+- Users can log pre-use and periodic inspections to elements, as well as input the number of uses a rope receives, and leave comments on the element
+- Administrators can adjust user permission levels, allowing or disallowing access to periodic inspections and element details
+- Administrators can manage the instructions provided to their staff for setup, takedown, and periodic inspections, as well as retire and replace ropes, view past inspections, and check comments made during the last week
+
 ### Future Features
 - "Make it look good"
 - Implement Devise and ActiveAdmin engines
@@ -24,7 +29,7 @@ FACEBOOK_SECRET = (your app secret here)
 You can then run `rails server` in your terminal, and the app will be available at localhost:3000.
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/ropes-sinatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/climb-on-js. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ## License
 The gem is available as open source under the terms of the GNU General Public License.
